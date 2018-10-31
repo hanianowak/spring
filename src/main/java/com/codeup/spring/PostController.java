@@ -25,14 +25,31 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
-    public String sendPostForm() {
-        return "view the form for creating a post";
+//    @ResponseBody
+    public String sendPostForm(Model vModel) {
+            vModel.addAttribute("post", new Post());
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
     @ResponseBody
-    public String createPost() {
-        return "create a new post";
+    public String createPost(Post post) {
+        Post savedPost = postService.save(post);
+        return "redirect:/posts/" + savedPost.getId();
     }
+
+    @GetMapping("/posts/{id}/edit")
+    public String showAdUpdateForm(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("post", postService.findOne(id));
+        return "posts/edit";
+    }
+
+    @PostMapping("/posts/{id}/edit")
+    public String showAdUpdateForm(@ModelAttribute Post post) {
+        Post updatedPost = postService.edit(post);
+        return "redirect:/posts/" + updatedPost.getId();
+    }
+
+
+
 }
