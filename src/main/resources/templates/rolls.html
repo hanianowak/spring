@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/head :: header('Hello')"></th:block>
+</head>
+<body>
+<description>
+    <nav th:replace="fragments/navbar :: navbar" />
+
+    <h4>Answer was: <span th:text="${answer}"></span></h4>
+    <h4>User guess: <span th:text="${guess}"></span></h4>
+    <h3 th:if="${guess == answer}">You got it!!!</h3>
+    <h3 th:if="${guess != answer}">Try again!</h3>
+
+</description>
+</body>
+</html>

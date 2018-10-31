@@ -1,20 +1,27 @@
 package com.codeup.spring;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-class PostController {
-    @GetMapping("/posts")
-    @ResponseBody
-    public String postsIndex() {
-        return "posts index page";
+public class PostController {
+
+    PostService postService  = new PostService();
+    
+        @GetMapping("/posts")
+    public String postsIndex(Model vModel) {
+//        posts.add(new Post(2L,"post 2", "Jelly beans jelly-o marzipan jelly biscuit. Toffee cookie candy canes chocolate cake cake danish candy canes powder. Gingerbread muffin caramels ice cream danish."));
+//        posts.add(new Post(3L,"post 3", "Jelly beans jelly-o marzipan jelly biscuit. Toffee cookie candy canes chocolate cake cake danish candy canes powder. Gingerbread muffin caramels ice cream danish."));
+        vModel.addAttribute("posts", postService.findAll());
+
+        return "posts/index";
     }
 
-    @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String individualPost(@PathVariable String id) {
-        return "view an individual post: id=" + id;
+    @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
+    public String postsId(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("post", postService.findOne((int) (id - 1)));
+        return "posts/show";
     }
 
     @GetMapping("/posts/create")
