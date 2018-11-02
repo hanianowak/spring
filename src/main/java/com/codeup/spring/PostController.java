@@ -1,5 +1,7 @@
 package com.codeup.spring;
 
+import javafx.geometry.Pos;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,9 +9,17 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PostController {
 
-    PostService postService  = new PostService();
+    @Autowired
+    PostsRepo postsRepo;
     
-        @GetMapping("/posts")
+
+    private final PostService postService;
+    // Dependency injection is happening
+    public PostController(PostService postService){
+        this.postService = postService;
+    }
+
+    @GetMapping("/posts")
     public String postsIndex(Model vModel) {
 //        posts.add(new Post(2L,"post 2", "Jelly beans jelly-o marzipan jelly biscuit. Toffee cookie candy canes chocolate cake cake danish candy canes powder. Gingerbread muffin caramels ice cream danish."));
 //        posts.add(new Post(3L,"post 3", "Jelly beans jelly-o marzipan jelly biscuit. Toffee cookie candy canes chocolate cake cake danish candy canes powder. Gingerbread muffin caramels ice cream danish."));
@@ -50,6 +60,40 @@ public class PostController {
         return "redirect:/posts/" + updatedPost.getId();
     }
 
+    @GetMapping("/posts/search/{term}")
+    public String showResults(@PathVariable String term, Model vModel){
+        vModel.addAttribute("posts", postService.search(term));
+        return "posts/index";
+    }
 
 
+//    @RequestMapping(path = "/posts/{id}/delete", method = RequestMethod.DELETE)
+//    public String delete(@PathVariable long id) {
+//        postService.delete(id);
+//        return "redirect:/posts";
+//    }
+
+//    @GetMapping(path = "/posts/{id}/delete")
+//    public String delete(@PathVariable long id) {
+//        postService.delete(id);
+//        return "redirect:/posts";
+//    }
+
+//    @RequestMapping(value = "/posts/{id}/delete", method = RequestMethod.DELETE)
+//    public @ResponseBody String delete(@PathVariable("id") long id) {
+//                postService.delete(id);
+//        return "redirect:/posts";
+//    }
+
+//    @PostMapping("/posts/{id}/delete")
+//    public String delete(@RequestParam("id") long id) {
+//        postService.delete(id);
+//        return "redirect:/posts";
+//    }
+
+    @GetMapping("/posts/{id}/delete")
+    public String delete(@ModelAttribute Post post){
+        postService.delete(post);
+        return "redirect:/posts";
+    }
 }
