@@ -12,14 +12,25 @@
                 <!--place for user email-->
                 <h6 class="card-subtitle mb-2 text-muted normie" th:text="${post.title}"/>
                 <p class="card-text normie" th:text="${post.body}"/>
+                <!--<h6 class="card-subtitle mb-2 text-muted normie" th:text="${post.user.email}"/>-->
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item categories text-danger">categories</li>
             </ul>
             <div class="pt-3 text-center">
             <ul class="list-inline">
-                <li class="list-inline-item"> <input type="submit" class="btn btn-warning btn nuts" name="submit" value="Edit" /></li>
-                <li class="list-inline-item"><input type="submit" class="btn btn-warning btn nuts" name="submit" value="Delete" /></li>
+
+                <li class="list-inline-item">
+                <form th:action="@{/posts/{id}/edit}" th:method="get">
+                    <button class="btn btn-warning">Edit</button>
+                </form>
+                </li>
+                <li class="list-inline-item">
+                    <form th:action="@{/posts/{id}/delete}" th:method="get">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </li>
+
             </ul>
             </div>
         </article>

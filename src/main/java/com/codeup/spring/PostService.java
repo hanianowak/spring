@@ -1,8 +1,9 @@
 package com.codeup.spring;
 
+import com.codeup.spring.models.Post;
+import com.codeup.spring.repositories.PostsRepo;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

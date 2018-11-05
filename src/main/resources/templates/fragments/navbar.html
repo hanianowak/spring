@@ -13,19 +13,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">HOME</a>
                 </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <th:block th:text="${'Welcome, ' + #authentication.principal.username}"/>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/posts">POSTS</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">LOGIN</a>
+                <li class="mr-1" sec:authorize="!isAuthenticated()">
+                    <a href="/sign-up" class="btn btn-success">Sign-up</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">LOGOUT</a>
+                <li sec:authorize="!isAuthenticated()">
+                    <a href="/login" class="btn btn-success">Login</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" th:method="post">
+                        <button class="btn btn-danger">Logout</button>
+                    </form>
                 </li>
                 <li>
                     <form action="" class="navbar-form navbar-right form-inline align-middle my-auto">
-                        <input class="form-control mr-1" type="search" name="search" placeholder="Search" aria-label="Search"
-                               value="" />
+                        <input class="form-control mr-1" type="search" name="search" placeholder="Search"
+                               aria-label="Search"
+                               value=""/>
                         <button class="btn btn-warning" type="submit">Search</button>
                     </form>
                 </li>

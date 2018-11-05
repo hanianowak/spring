@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>create</title>
-</head>
+<head th:replace="fragments/header :: head('Ads')"></head>
 <body>
+<div class="container">
+    <div th:replace="fragments/navbar :: myNav"></div>
 
-<form action="/posts/create" method="post">
-    Title:
-    <input name="title" />
-    <br />
-    Description:
-    <input name="body" />
-    <br />
-    <input type="submit" />
-</form>
+
+    <div class="container text-center border border-primary mt-5 p-5 rounded">
+        <h1>Create your post!</h1>
+        <form action="/posts/create" method="post">
+            Title:
+            <input name="title"/>
+            <br/>
+            Description:
+            <input name="body"/>
+            <br/>
+            <input type="submit"/>
+        </form>
+    </div>
+</div>
 </body>
 </html>
