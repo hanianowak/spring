@@ -1,14 +1,29 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Home</title>
-</head>
+<head th:replace="fragments/header :: head('Ads')"></head>
 <body>
+<div class="container">
+    <div th:replace="fragments/navbar :: myNav"></div>
 
-<div>
-    <h3 th:text="${post.title}"/>
-    <p th:text="${post.body}" />
+    <main class="card m-5">
+        <article class="card border-warning">
+            <div class="card-body">
+                <h4 th:text="${post.title}" class="card-title text-center"/>
+                <h6 class="card-subtitle mb-2 text-muted normie">date</h6>
+                <!--place for user email-->
+                <h6 class="card-subtitle mb-2 text-muted normie" th:text="${post.title}"/>
+                <p class="card-text normie" th:text="${post.body}"/>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item categories text-danger">categories</li>
+            </ul>
+            <div class="pt-3 text-center">
+            <ul class="list-inline">
+                <li class="list-inline-item"> <input type="submit" class="btn btn-warning btn nuts" name="submit" value="Edit" /></li>
+                <li class="list-inline-item"><input type="submit" class="btn btn-warning btn nuts" name="submit" value="Delete" /></li>
+            </ul>
+            </div>
+        </article>
+    </main>
 </div>
 </body>
 </html>

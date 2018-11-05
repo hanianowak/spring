@@ -2,11 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: head('Ads')"></head>
 <body>
-<div th:replace="fragments/navbar :: myNav"></div>
+<div class="container">
+    <div th:replace="fragments/navbar :: myNav"></div>
 
-<div th:each="post : ${posts}">
-    <h3 th:text="${post.title}"/>
-    <h3 th:text="${post.body}"/>
+    <main class="card m-5">
+        <div th:each="post : ${posts}">
+            <article class="card border-danger mb-5">
+                <div class="card-body">
+                    <h4 th:text="${post.title}" class="card-title text-center"/>
+                    <h6 class="card-subtitle mb-2 text-muted normie">date</h6>
+                    <!--place for user email-->
+                    <h6 class="card-subtitle mb-2 text-muted normie" th:text="${post.user.email}"/>
+                    <p class="card-text normie" th:text="${post.body}"/>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item categories text-danger">categories</li>
+                </ul>
+            </article>
+        </div>
+    </main>
 </div>
 </body>
 </html>

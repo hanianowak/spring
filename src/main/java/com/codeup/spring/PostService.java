@@ -52,10 +52,10 @@ class PostService {
     }
 
 
-    private void createPosts() {
-        save(new Post(1, "post 1", "Jelly beans jelly-o marzipan jelly biscuit. Gingerbread muffin caramels ice cream danish."));
-        save(new Post(2, "post 2", "Toffee cookie candy canes chocolate cake cake danish candy canes powder. Gingerbread muffin caramels ice cream danish."));
-        save(new Post(3, "post 3", "Toffee cookie candy canes chocolate cake cake danish candy canes powder. Gingerbread muffin caramels ice cream danish."));
-
-    }
+//    private void createPosts() {
+//        save(new Post(1, "post 1", "Jelly beans jelly-o marzipan jelly biscuit. Gingerbread muffin caramels ice cream danish."));
+//        save(new Post(2, "post 2", "Toffee cookie candy canes chocolate cake cake danish candy canes powder. Gingerbread muffin caramels ice cream danish."));
+//        save(new Post(3, "post 3", "Toffee cookie candy canes chocolate cake cake danish candy canes powder. Gingerbread muffin caramels ice cream danish."));
+//
+//    }
 }

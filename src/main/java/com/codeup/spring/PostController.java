@@ -11,6 +11,9 @@ public class PostController {
 
     @Autowired
     PostsRepo postsRepo;
+
+    @Autowired
+    UserRepository userRepository;
     
 
     private final PostService postService;
@@ -30,7 +33,7 @@ public class PostController {
 
     @RequestMapping(path = "/posts/{id}", method = RequestMethod.GET)
     public String postsId(@PathVariable long id, Model vModel) {
-        vModel.addAttribute("post", postService.findOne((int) (id - 1)));
+        vModel.addAttribute("post", postService.findOne(id));
         return "posts/show";
     }
 
@@ -44,18 +47,20 @@ public class PostController {
     @PostMapping("/posts/create")
     @ResponseBody
     public String createPost(Post post) {
+        post.setUser(userRepository.findOne(1L));
         Post savedPost = postService.save(post);
         return "redirect:/posts/" + savedPost.getId();
     }
 
     @GetMapping("/posts/{id}/edit")
-    public String showAdUpdateForm(@PathVariable long id, Model vModel) {
+    public String showPostUpdateForm(@PathVariable long id, Model vModel) {
         vModel.addAttribute("post", postService.findOne(id));
         return "posts/edit";
     }
 
     @PostMapping("/posts/{id}/edit")
-    public String showAdUpdateForm(@ModelAttribute Post post) {
+    public String updateForm(@ModelAttribute Post post) {
+        post.setUser(userRepository.findOne(1L));
         Post updatedPost = postService.edit(post);
         return "redirect:/posts/" + updatedPost.getId();
     }
