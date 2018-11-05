@@ -18,8 +18,9 @@ public class PostController {
 
     private final PostService postService;
     // Dependency injection is happening
-    public PostController(PostService postService){
+    public PostController(PostService postService, UserRepository userRepository){
         this.postService = postService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/posts")

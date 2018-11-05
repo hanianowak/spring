@@ -22,7 +22,8 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
-    
+
+    public User (){}
 
     public User(long id, String username, String email, String password, List<Post> posts) {
         this.id = id;

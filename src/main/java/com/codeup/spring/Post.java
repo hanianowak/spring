@@ -20,10 +20,6 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
-//    private long id;
-//    private String title;
-//    private String body;
-
     public Post(long id, String title, String body, User user) {
         this.id = id;
         this.title = title;
